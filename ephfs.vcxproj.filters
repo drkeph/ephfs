@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="data-block.h" />
+    <ClInclude Include="err.h" />
+    <ClInclude Include="file-hdr.h" />
+    <ClInclude Include="fileop.h" />
+    <ClInclude Include="hdr.h" />
+    <ClInclude Include="murmur3.h" />
+    <ClInclude Include="partition-hdr.h" />
+    <ClInclude Include="typedefs.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="fileop.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="murmur3.c" />
+  </ItemGroup>
+</Project>
