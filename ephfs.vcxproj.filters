@@ -17,5 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="readme.md" />
+    <None Include="docs\epherfs-v-ktsn.md" />
   </ItemGroup>
 </Project>

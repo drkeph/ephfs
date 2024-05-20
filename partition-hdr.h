@@ -8,7 +8,7 @@
 #pragma pack(push, 1)
 typedef struct _EPHFS_PARTITION_HDR {
 	/*0x00*/	char	Name[32];
-	/*0x20*/	u64		NumberOfSectors;
+	/*0x20*/	u64		NumberOfSectors;		// maximum number of sectors in a partition
 	/*0x28*/	u64		NumberOfFreeSectors;
 	/*0x30*/	u64		NumberOfFiles;
 	/*0x38*/	u64		FileTableOffset;		// offset to the first file header in sectors

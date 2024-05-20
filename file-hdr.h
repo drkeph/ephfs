@@ -10,17 +10,18 @@
 #define EPHFS_FILE_ATTRIBUTE_DIRECTORY	0x01
 #define EPHFS_FILE_ATTRIBUTE_SYSTEM		0x02
 #define EPHFS_FILE_ATTRIBUTE_HIDDEN		0x04
+#define EPHFS_FILE_ATTRIBUTE_READONLY	0x08
 
 #pragma pack(push, 1)
 typedef struct _EPHFS_FILE_HDR {
-	char	Name[256];
-	u32		ID;							// Murmur v3 x86 (https://en.wikipedia.org/wiki/MurmurHash)
-	u32		ParentDirectoryID;			// Murmur v3 x86
-	u64		Length;						// number of data sectors
-	u64		OriginalSize;
-	u64		Attributes;
-	u64		FirstDataBlockOffset;		// offset to the first block of file data in sectors
-	u64		Reserved[27];
+	/*0x000*/	char	Name[256];
+	/*0x100*/	u32		ID;							// Murmur v3 x86 (https://en.wikipedia.org/wiki/MurmurHash)
+	/*0x104*/	u32		ParentDirectoryID;			// Murmur v3 x86
+	/*0x108*/	u64		Length;						// number of data sectors
+	/*0x110*/	u64		OriginalSize;
+	/*0x118*/	u64		Attributes;
+	/*0x120*/	u64		FirstDataBlockOffset;		// offset to the first block of file data in sectors
+	/*0x128*/	u64		Reserved[27];
 } EPHFS_FILE_HDR;
 #pragma pack(pop)
 

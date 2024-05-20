@@ -3,6 +3,7 @@
 *.*
 .*
 !.gitignore
+!*.md
 !*.sln
 !*.vcxproj
 !*.vcxproj.filters

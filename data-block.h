@@ -6,8 +6,8 @@
 
 #pragma pack(push, 1)
 typedef struct _EPHFS_DATA_BLOCK {
-	u8	Data[504];
-	u64	NextDataBlockOffset;		// offset to the next block of file data in sectors (if last, then is 0)
+	/*0x000*/	u8	Data[504];
+	/*0x1F8*/	u64	NextDataBlockOffset;		// offset to the next block of file data in sectors (if last, then is 0)
 } EPHFS_DATA_BLOCK;
 #pragma pack(pop)
 
