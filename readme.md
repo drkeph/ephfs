@@ -1,4 +1,4 @@
-#	`EPHERFS` utility v1.0.0
+#	`EPHERFS` utility v1.0.1
 ###	What is `EPHERFS`?
 ####	It is a simple file system designed to simplify the process of creating an OS
 ####	More details: [here](./docs/epherfs-v-ktsn.md)

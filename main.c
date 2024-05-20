@@ -158,9 +158,6 @@ u8* CreateFileTableFromDirectory(const wchar_t* dirpath, size_t *resfiles, size_
 	for (i = 0; i < numfiles; ++i) {
 		pathlen = wcslen(objs[i].Path);
 		extrapathlen = wcslen(dirpath) + 1;
-
-		if (pathlen >= SIZE_OF(EPHFS_FILE_HDR, Name)) THROW_ERROR(L"file (`%s`) path length (%lu) > %lu!\n", objs[i].Path, (unsigned long)pathlen, (unsigned long)SIZE_OF(EPHFS_FILE_HDR, Name));
-
 		totalsize += sizeof(EPHFS_FILE_HDR);
 
 		objs[i].FSPath = (char*)calloc(pathlen + 1 - extrapathlen, sizeof(char));
@@ -189,12 +186,29 @@ u8* CreateFileTableFromDirectory(const wchar_t* dirpath, size_t *resfiles, size_
 	for (i = 0; i < numfiles; ++i) {
 		memset(filehdr, 0, sizeof(EPHFS_FILE_HDR));
 		chpos = strrchr(objs[i].FSPath, '/');
+
 		if (chpos) {
-			memcpy(filehdr->Name, chpos + 1, strlen(chpos));
+			pathlen = strlen(chpos);
+			if (pathlen >= SIZE_OF(EPHFS_FILE_HDR, Name)) {
+				THROW_ERROR(
+					L"file (`%s`) name length (%lu) >= %lu!\n", objs[i].Path, (unsigned long)pathlen,
+					(unsigned long)SIZE_OF(EPHFS_FILE_HDR, Name)
+				);
+			}
+
+			memcpy(filehdr->Name, chpos + 1, pathlen);
 			filehdr->ParentDirectoryID = murmur3_32(objs[i].FSPath, (u32)((size_t)chpos - (size_t)objs[i].FSPath), EPHFS_FILE_ID_HASH_SEED);
 		}
 		else {
-			memcpy(filehdr->Name, objs[i].FSPath, strlen(objs[i].FSPath) + 1);
+			pathlen = strlen(objs[i].FSPath) + 1;
+			if (pathlen >= SIZE_OF(EPHFS_FILE_HDR, Name)) {
+				THROW_ERROR(
+					L"file (`%s`) name length (%lu) >= %lu!\n", objs[i].Path, (unsigned long)pathlen,
+					(unsigned long)SIZE_OF(EPHFS_FILE_HDR, Name)
+				);
+			}
+
+			memcpy(filehdr->Name, objs[i].FSPath, pathlen);
 			filehdr->ParentDirectoryID = EPHFS_ROOT_ID;
 		}
 
@@ -343,7 +357,7 @@ int wmain(int argc, wchar_t** argv) {
 	if (argc < 2) THROW_ERROR(L"invalid arguments (-help - get info)!\n");
 
 	if (!wcscmp(argv[1], L"-help")) {
-		puts("EPHERFS utility v1.0.0\nUsage:");
+		puts("EPHERFS utility v1.0.1\nUsage:");
 		puts("\tephfs <action> [...]");
 		puts("\tActions:");
 		puts("\t\t-help - get info");
