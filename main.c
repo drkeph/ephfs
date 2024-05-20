@@ -524,7 +524,7 @@ int wmain(int argc, wchar_t** argv) {
 					FastAppendFile(wfullfilepath, datablock->Data, filesize);
 					totalsize += filesize;
 				}
-
+				
 				free(wfullfilepath);
 			}
 

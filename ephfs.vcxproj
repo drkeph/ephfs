@@ -33,6 +33,9 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="murmur3.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

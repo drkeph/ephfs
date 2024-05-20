@@ -15,4 +15,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="murmur3.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
 </Project>
